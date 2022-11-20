@@ -1,6 +1,25 @@
 // DEPENDENCIES
 const express = require('express')
 
+// DEPENDENCIES
+const methodOverride = require('method-override')
+
+
+// MIDDLEWARE
+app.use(express.static('public'))
+
+
+// MIDDLEWARE
+app.use(express.urlencoded({extended: true}))
+
+// MIDDLEWARE
+app.use(express.static('public'))
+
+// MIDDLEWARE
+app.use(methodOverride('_method'))
+
+
+
 // MIDDLEWARE
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
@@ -31,3 +50,10 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log('listening on port', PORT);
 })
+
+
+// 404 Page
+app.get('*', (req, res) => {
+  res.send('404')
+})
+
